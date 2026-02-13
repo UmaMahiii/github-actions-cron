@@ -2,8 +2,8 @@ name: Daily Activity Commit
 
 on:
   schedule:
-    - cron: "30 18 * * *"
-  workflow_dispatch:
+    - cron: "30 13 * * *"
+ 
 
 jobs:
   activity:
@@ -16,7 +16,7 @@ jobs:
       - name: Configure Git
         run: |
           git config --global user.name "UmaMahiii"
-          git config --global user.email "umamaheswaris9074@gmil.com"
+          git config --global user.email "umamaheswaris9074@gmail.com"
 
       - name: Make changes
         run: |
