@@ -2,25 +2,27 @@ name: Daily Activity Commit
 
 on:
   schedule:
-    - cron: "0 6 * * 1-5"  # Runs Monday–Friday at 6 AM UTC
-  workflow_dispatch:
+    - cron: "30 18 * * *"   # Runs daily at 12:00 AM IST (6:30 PM UTC)
 
 jobs:
   activity:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Make a change
+      - name: Configure Git
         run: |
-          echo "Activity run at $(date)" >> log.txt
+          git config --global user.name "UmaMahiii"
+          git config --global user.email "umamaheswaris9074@gmil.com"
 
-      - name: Commit and push
+      - name: Make changes
         run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add .
-          git commit -m "Automated daily activity" || echo "No changes"
+          echo "Last run: $(date)" >> activity.txt
+
+      - name: Commit and Push
+        run: |
+          git add activity.txt
+          git commit -m "Daily scheduled commit" || echo "No changes to commit"
           git push
